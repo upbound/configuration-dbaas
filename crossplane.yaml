@@ -1,0 +1,17 @@
+apiVersion: meta.pkg.crossplane.io/v1
+kind: Configuration
+metadata:
+  name: configuration-dbaas
+  annotations:
+    meta.crossplane.io/maintainer: Upbound <support@upbound.io>
+    meta.crossplane.io/source: github.com/upbound/configuration-dbaas
+    meta.crossplane.io/license: Apache-2.0
+
+spec:
+  crossplane:
+    version: ">=v1.13.2-0"
+  dependsOn:
+    - configuration: xpkg.upbound.io/upbound/configuration-aws-database
+      version: ">=v0.1.0"
+    - configuration: xpkg.upbound.io/upbound/configuration-azure-database
+      version: ">=v0.1.0"

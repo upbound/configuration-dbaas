@@ -1,0 +1,28 @@
+apiVersion: dbaas.upbound.io/v1alpha1
+kind: SQLInstance
+metadata:
+  name: configuration-dbaas-azure-mariadb
+  namespace: default
+spec:
+  compositionSelector:
+    matchLabels:
+      provider: azure
+  parameters:
+    region: westus
+    engine: mariadb
+    storageGB: 5
+    passwordSecretRef:
+      namespace: default
+      name: mariadbsecret
+      key: password
+  writeConnectionSecretToRef:
+    name: configuration-dbaas-azure-mariadb
+---
+apiVersion: v1
+data:
+  password: dXBiMHVuZHIwY2s1ITMxMzM3
+kind: Secret
+metadata:
+  name: mariadbsecret
+  namespace: default
+type: Opaque

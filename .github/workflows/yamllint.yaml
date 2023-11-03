@@ -1,0 +1,15 @@
+name: yamllint
+on: [pull_request]
+jobs:
+  yamllint:
+    name: runner / yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: yamllint
+        uses: reviewdog/action-yamllint@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review # Change reporter.
+          yamllint_flags: 'apis/'
+          fail_on_error: true
