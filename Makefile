@@ -58,15 +58,12 @@ build.init: $(UP)
 # End to End Testing
 
 # This target requires the following environment variables to be set:
-# - UPTEST_CLOUD_CREDENTIALS_AWS, cloud credentials for the provider being tested, e.g. export UPTEST_CLOUD_CREDENTIALS_AWS=$(cat ~/.aws/credentials)
-# - UPTEST_CLOUD_CREDENTIALS_AZURE, cloud credentials for the provider being tested, e.g. export UPTEST_CLOUD_CREDENTIALS_AZURE=$(cat azure.json)
+# $ export UPTEST_CLOUD_CREDENTIALS=$(echo "AWS='$(cat ~/.aws/credentials)'\nAZURE='$(cat ~/.azure/credentials.json)'")
 uptest: $(UPTEST) $(KUBECTL) $(KUTTL)
 	@$(INFO) running automated tests
 	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) $(UPTEST) e2e examples/postgres-aws-claim.yaml,examples/mariadb-aws-claim.yaml,examples/postgres-azure-claim.yaml,examples/mariadb-azure-claim.yaml --setup-script=test/setup.sh --default-timeout=2400 || $(FAIL)
 	@$(OK) running automated tests
 
-# This target requires the following environment variables to be set:
-# - UPTEST_CLOUD_CREDENTIALS, cloud credentials for the provider being tested, e.g. export UPTEST_CLOUD_CREDENTIALS=$(cat azure.json)
 e2e: build controlplane.up local.xpkg.deploy.configuration.$(PROJECT_NAME) uptest
 
 .PHONY: uptest e2e
