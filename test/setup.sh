@@ -7,7 +7,7 @@ echo "Waiting until all configuration packages are healthy/installed..."
 "${KUBECTL}" wait configuration.pkg --all --for=condition=Installed --timeout 5m
 
 echo "Creating AWS cloud credential secret..."
-"${KUBECTL}" -n upbound-system create secret generic azure-creds --from-literal=credentials="${UPTEST_CLOUD_CREDENTIALS_AWS}" \
+"${KUBECTL}" -n upbound-system create secret generic aws-creds --from-literal=credentials="${UPTEST_CLOUD_CREDENTIALS_AWS}" \
     --dry-run=client -o yaml | ${KUBECTL} apply -f -
 
 echo "Creating Azure cloud credential secret..."
@@ -23,7 +23,22 @@ echo "Waiting for all pods to come online..."
 echo "Waiting for all XRDs to be established..."
 "${KUBECTL}" wait xrd --all --for condition=Established
 
-echo "Creating a default provider config..."
+echo "Creating a AWS default provider config..."
+cat <<EOF | "${KUBECTL}" apply -f -
+apiVersion: aws.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    secretRef:
+      key: credentials
+      name: aws-creds
+      namespace: upbound-system
+    source: Secret
+EOF
+
+echo "Creating a Azure default provider config..."
 cat <<EOF | "${KUBECTL}" apply -f -
 apiVersion: azure.upbound.io/v1beta1
 kind: ProviderConfig

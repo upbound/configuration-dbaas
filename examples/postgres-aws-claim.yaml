@@ -1,28 +1,29 @@
 apiVersion: dbaas.upbound.io/v1alpha1
 kind: SQLInstance
 metadata:
-  name: configuration-dbaas-azure-postgresql
+  name: configuration-dbaas-aws-postgresql
   namespace: default
 spec:
   compositionSelector:
     matchLabels:
-      provider: azure
+      provider: aws
   parameters:
-    region: westus
+    region: us-west-2
     engine: postgres
+    engineVersion: "15.3"
     storageGB: 5
     passwordSecretRef:
       namespace: default
-      name: psqlsecretazure
+      name: psqlsecretaws
       key: password
   writeConnectionSecretToRef:
-    name: configuration-dbaas-azure-postgresql
+    name: configuration-dbaas-aws-postgresql
 ---
 apiVersion: v1
 data:
   password: dXBiMHVuZHIwY2s1ITMxMzM3
 kind: Secret
 metadata:
-  name: psqlsecretazure
+  name: psqlsecretaws
   namespace: default
 type: Opaque

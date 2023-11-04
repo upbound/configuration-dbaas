@@ -13,7 +13,7 @@ spec:
     storageGB: 5
     passwordSecretRef:
       namespace: default
-      name: mariadbsecret
+      name: mariadbsecretazure
       key: password
   writeConnectionSecretToRef:
     name: configuration-dbaas-azure-mariadb
@@ -23,6 +23,6 @@ data:
   password: dXBiMHVuZHIwY2s1ITMxMzM3
 kind: Secret
 metadata:
-  name: mariadbsecret
+  name: mariadbsecretazure
   namespace: default
 type: Opaque

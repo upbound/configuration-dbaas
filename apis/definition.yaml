@@ -48,7 +48,10 @@ spec:
                       type: string
                       enum:
                         - mariadb
-                        - postgresql
+                        - postgres
+                    engineVersion:
+                      description: Database engine version
+                      type: string
                     storageGB:
                       description: Database storage size in gigabytes
                       type: integer
