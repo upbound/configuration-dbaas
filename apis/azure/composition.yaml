@@ -49,11 +49,6 @@ spec:
           toFieldPath: spec.parameters.networkRef.id
         - fromFieldPath: spec.parameters.engine
           toFieldPath: spec.compositionSelector.matchLabels[dbengine]
-          transforms:  # NOTE(ytsarev): to be removed when azure-database consolidate on 'postgres' selector in next release
-            - type: map
-              map:
-                mariadb: mariadb
-                postgres: postgresql
       connectionDetails:
         - type: FromConnectionSecretKey
           name: host
