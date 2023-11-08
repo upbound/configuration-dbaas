@@ -7,13 +7,13 @@ metadata:
     meta.crossplane.io/source: github.com/upbound/configuration-dbaas
     meta.crossplane.io/license: Apache-2.0
     meta.crossplane.io/description: |
-      The configuration-dbaas configuration provides abstraction over multicloud
-      database instance management.
+      The configuration-dbaas configuration provides an example abstraction to
+      provision multi-cloud database instances.
     meta.crossplane.io/readme: |
-      The configuration-dbaas bundles the single API that allows unified multicloud
-      provisioning of fully managed database instances.
-      Deploy most popular database services using the same consistent Claim spec.
-
+      The configuration-dbaas bundles a single API that allows unified
+      multi-cloud provisioning of fully managed database instances. Save time
+      and improve reliability by deploying the most popular database services
+      using the same consistent Claim spec.
 spec:
   crossplane:
     version: ">=v1.13.2-0"
