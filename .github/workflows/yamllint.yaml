@@ -7,9 +7,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: yamllint
-        uses: reviewdog/action-yamllint@v1
+        uses: reviewdog/action-yamllint@v1.9.0
         with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review # Change reporter.
+          reporter: github-pr-review
+          filter_mode: nofilter
           yamllint_flags: 'apis/'
           fail_on_error: true

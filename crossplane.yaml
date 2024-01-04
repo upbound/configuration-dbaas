@@ -16,9 +16,11 @@ metadata:
       using the same consistent Claim spec.
 spec:
   crossplane:
-    version: ">=v1.13.2-0"
+    version: ">=v1.14.1-0"
   dependsOn:
     - configuration: xpkg.upbound.io/upbound/configuration-aws-database
-      version: ">=v0.1.0"
+      # renovate: datasource=github-releases depName=upbound/configuration-aws-database
+      version: "v0.5.0"
     - configuration: xpkg.upbound.io/upbound/configuration-azure-database
-      version: ">=v0.2.0"
+      # renovate: datasource=github-releases depName=upbound/configuration-azure-database
+      version: "v0.4.0"
