@@ -1,6 +1,6 @@
 
 
-# database Configuration
+# Database-as-a-service Configuration
 
 
 This repository contains a [Crossplane configuration](https://docs.crossplane.io/v1.11/concepts/packages/#configuration-packages), tailored for users establishing their initial control plane with [Upbound](https://cloud.upbound.io). This configuration deploys fully managed database instances in any cloud.
