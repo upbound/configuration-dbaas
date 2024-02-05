@@ -32,10 +32,4 @@ spec:
 
 ## Next steps
 
-This repository serves as a foundational step. To enhance your control plane, consider:
-
-1. create new API definitions in this same repo
-2. editing the existing API definition to your needs
-
-
 Upbound will automatically detect the commits you make in your repo and build the configuration package for you. To learn more about how to build APIs for your managed control planes in Upbound, read the guide on Upbound's docs.
