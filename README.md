@@ -15,7 +15,7 @@ The core components of a custom API in [Crossplane](https://docs.crossplane.io/v
 In this specific configuration, the database API contains:
 
 - **an database (/apis/definition.yaml) custom resource type.**
-- **Composition of the database resources:** Configured in [/apis/composition.yaml](/apis/composition.yaml), it provisions an databaseand resources in the `upbound-system` namespace.
+- **Compositions of the database resources:** Configured in the [/apis/](/apis/) directory, it can provision Azure or AWS database-as-a-service resources in the `upbound-system` namespace.
 
 This repository contains an Composite Resource (XR) file.
 
