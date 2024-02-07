@@ -1,13 +1,11 @@
-
-
 # Database-as-a-service Configuration
 
 
-This repository contains a [Crossplane configuration](https://docs.crossplane.io/v1.11/concepts/packages/#configuration-packages), tailored for users establishing their initial control plane with [Upbound](https://cloud.upbound.io). This configuration deploys fully managed database instances in any cloud.
+This repository contains a [Crossplane configuration](https://docs.crossplane.io/latest/concepts/packages/#configuration-packages), tailored for users establishing their initial control plane with [Upbound](https://cloud.upbound.io). This configuration deploys fully managed database instances in any cloud.
 
 ## Overview
 
-The core components of a custom API in [Crossplane](https://docs.crossplane.io/v1.11/getting-started/introduction/) include:
+The core components of a custom API in [Crossplane](https://docs.crossplane.io/latest/getting-started/introduction/) include:
 
 - **CompositeResourceDefinition (XRD):** Defines the API's structure.
 - **Composition(s):** Implements the API by orchestrating a set of Crossplane managed resources.
