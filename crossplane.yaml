@@ -23,4 +23,4 @@ spec:
       version: "v0.8.0"
     - configuration: xpkg.upbound.io/upbound/configuration-azure-database
       # renovate: datasource=github-releases depName=upbound/configuration-azure-database
-      version: "v0.4.0"
+      version: "v0.6.0"
