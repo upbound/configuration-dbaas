@@ -1,0 +1,29 @@
+apiVersion: dbaas.upbound.io/v1alpha1
+kind: SQLInstance
+metadata:
+  name: configuration-dbaas-gcp-mysql
+  namespace: default
+spec:
+  compositionSelector:
+    matchLabels:
+      provider: gcp
+  parameters:
+    region: us-west2
+    engine: mysql
+    engineVersion: "8_0"
+    storageGB: 10
+    passwordSecretRef:
+      namespace: default
+      name: mysqlsecretgcp
+      key: password
+  writeConnectionSecretToRef:
+    name: configuration-dbaas-gcp-mysql
+---
+apiVersion: v1
+data:
+  password: dXBiMHVuZHIwY2s1ITMxMzM3
+kind: Secret
+metadata:
+  name: mysqlsecretgcp
+  namespace: default
+type: Opaque

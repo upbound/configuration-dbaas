@@ -24,3 +24,6 @@ spec:
     - configuration: xpkg.upbound.io/upbound/configuration-azure-database
       # renovate: datasource=github-releases depName=upbound/configuration-azure-database
       version: "v0.6.0"
+    - configuration: xpkg.upbound.io/upbound/configuration-gcp-database
+      # renovate: datasource=github-releases depName=upbound/configuration-gcp-database
+      version: "v0.2.0"
