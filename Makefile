@@ -58,12 +58,16 @@ build.init: $(UP)
 # End to End Testing
 
 # This target requires the following environment variables to be set:
-# $ export UPTEST_CLOUD_CREDENTIALS=$(echo "AWS='$(cat ~/.aws/credentials)'\nAZURE='$(cat ~/.azure/credentials.json)'")
+# $ export UPTEST_CLOUD_CREDENTIALS="AWS='$(cat ~/.aws/credentials)'
+# AZURE='$(cat ~/.azure/credentials.json)'
+# GCP='$(cat ~/upbound/sa-up/crossplane-gcp-provider-key.json)'"
+SKIP_DELETE ?=
 uptest: $(UPTEST) $(KUBECTL) $(KUTTL)
 	@$(INFO) running automated tests
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST) e2e examples/postgres-aws-claim.yaml,examples/mariadb-aws-claim.yaml,examples/postgres-azure-claim.yaml,examples/mariadb-azure-claim.yaml --setup-script=test/setup.sh --default-timeout=2400 || $(FAIL)
+	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST) e2e examples/postgres-aws-claim.yaml,examples/mariadb-aws-claim.yaml,examples/postgres-azure-claim.yaml,examples/mariadb-azure-claim.yaml,examples/postgres-gcp-claim.yaml,examples/mysql-gcp-claim.yaml --setup-script=test/setup.sh --default-timeout=2400 $(SKIP_DELETE) || $(FAIL)
 	@$(OK) running automated tests
 
+# Use `make e2e SKIP_DELETE=--skip-delete` to skip deletion of resources created during the test.
 e2e: build controlplane.up local.xpkg.deploy.configuration.$(PROJECT_NAME) uptest
 
 render:
@@ -71,6 +75,8 @@ render:
 	crossplane beta render examples/postgres-aws-claim.yaml apis/aws/composition.yaml examples/function/function.yaml -r
 	crossplane beta render examples/mariadb-azure-claim.yaml apis/azure/composition.yaml examples/function/function.yaml -r
 	crossplane beta render examples/postgres-azure-claim.yaml apis/azure/composition.yaml examples/function/function.yaml -r
+	crossplane beta render examples/postgres-gcp-claim.yaml apis/gcp/composition.yaml examples/function/function.yaml -r
+	crossplane beta render examples/mysql-gcp-claim.yaml apis/gcp/composition.yaml examples/function/function.yaml -r
 
 yamllint:
 	@$(INFO) running yamllint

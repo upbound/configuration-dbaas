@@ -1,0 +1,29 @@
+apiVersion: dbaas.upbound.io/v1alpha1
+kind: SQLInstance
+metadata:
+  name: configuration-dbaas-gcp-postgresql
+  namespace: default
+spec:
+  compositionSelector:
+    matchLabels:
+      provider: gcp
+  parameters:
+    region: us-west2
+    engine: postgres
+    engineVersion: "15"
+    storageGB: 10
+    passwordSecretRef:
+      namespace: default
+      name: psqlsecretgcp
+      key: password
+  writeConnectionSecretToRef:
+    name: configuration-dbaas-gcp-postgresql
+---
+apiVersion: v1
+data:
+  password: dXBiMHVuZHIwY2s1ITMxMzM3
+kind: Secret
+metadata:
+  name: psqlsecretgcp
+  namespace: default
+type: Opaque

@@ -1,0 +1,96 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xsqlinstances.gcp.dbaas.upbound.io
+  labels:
+    provider: gcp
+spec:
+  writeConnectionSecretsToNamespace: upbound-system
+  compositeTypeRef:
+    apiVersion: dbaas.upbound.io/v1alpha1
+    kind: XSQLInstance
+  mode: Pipeline
+  pipeline:
+    - step: patch-and-transform
+      functionRef:
+        name: crossplane-contrib-function-patch-and-transform
+      input:
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        patchSets:
+          - name: providerConfigRef
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.providerConfigName
+                toFieldPath: spec.parameters.providerConfigName
+          - name: deletionPolicy
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.deletionPolicy
+                toFieldPath: spec.parameters.deletionPolicy
+          - name: region
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.region
+                toFieldPath: spec.parameters.region
+        resources:
+          - name: xsqlinstance
+            base:
+              apiVersion: gcp.platform.upbound.io/v1alpha1
+              kind: XSQLInstance
+            connectionDetails:
+              - type: FromConnectionSecretKey
+                fromConnectionSecretKey: host
+                name: host
+              - type: FromConnectionSecretKey
+                fromConnectionSecretKey: username
+                name: username
+              - type: FromConnectionSecretKey
+                fromConnectionSecretKey: password
+                name: password
+              - type: FromConnectionSecretKey
+                fromConnectionSecretKey: port
+                name: port
+            patches:
+              - type: PatchSet
+                patchSetName: providerConfigRef
+              - type: PatchSet
+                patchSetName: deletionPolicy
+              - type: PatchSet
+                patchSetName: region
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.storageGB
+                toFieldPath: spec.parameters.storageGB
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.passwordSecretRef.namespace
+                toFieldPath: spec.parameters.passwordSecretRef.namespace
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.passwordSecretRef.name
+                toFieldPath: spec.parameters.passwordSecretRef.name
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.passwordSecretRef.key
+                toFieldPath: spec.parameters.passwordSecretRef.key
+              - type: FromCompositeFieldPath
+                fromFieldPath: metadata.name
+                toFieldPath: spec.parameters.networkRef.id
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.engine
+                toFieldPath: spec.parameters.engine
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.engineVersion
+                toFieldPath: spec.parameters.engineVersion
+
+          - name: xnetwork
+            base:
+              apiVersion: gcp.platform.upbound.io/v1alpha1
+              kind: XNetwork
+            patches:
+              - type: PatchSet
+                patchSetName: region
+              - type: PatchSet
+                patchSetName: providerConfigRef
+              - type: PatchSet
+                patchSetName: deletionPolicy
+              - type: FromCompositeFieldPath
+                fromFieldPath: metadata.name
+                toFieldPath: spec.parameters.id
