@@ -19,6 +19,19 @@ spec:
     - name: v1alpha1
       served: true
       referenceable: true
+      additionalPrinterColumns:
+        - name: Cloud
+          type: string
+          description: Cloud Environment
+          jsonPath: .spec.compositionSelector.matchLabels.provider
+        - name: Engine
+          type: string
+          description: Database Engine
+          jsonPath: .spec.parameters.engine
+        - name: Version
+          type: string
+          description: Database Engine Verion
+          jsonPath: .spec.parameters.engineVersion
       schema:
         openAPIV3Schema:
           type: object
