@@ -10,6 +10,7 @@ spec:
   parameters:
     region: westus
     engine: postgres
+    engineVersion: "11"
     storageGB: 5
     passwordSecretRef:
       namespace: default
