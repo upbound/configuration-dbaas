@@ -3,4 +3,4 @@ kind: Configuration
 metadata:
   name: configuration-dbaas
 spec:
-  package: xpkg.upbound.io/upbound/configuration-dbaas:v0.2.0
+  package: xpkg.upbound.io/upbound/configuration-dbaas:v0.5.0
