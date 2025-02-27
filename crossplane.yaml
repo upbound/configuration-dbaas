@@ -20,10 +20,10 @@ spec:
   dependsOn:
     - configuration: xpkg.upbound.io/upbound/configuration-aws-database
       # renovate: datasource=github-releases depName=upbound/configuration-aws-database
-      version: "v0.14.0"
+      version: "v0.15.0"
     - configuration: xpkg.upbound.io/upbound/configuration-azure-database
       # renovate: datasource=github-releases depName=upbound/configuration-azure-database
-      version: "v0.14.0"
+      version: "v0.15.0"
     - configuration: xpkg.upbound.io/upbound/configuration-gcp-database
       # renovate: datasource=github-releases depName=upbound/configuration-gcp-database
-      version: "v0.8.0"
+      version: "v0.9.0"
