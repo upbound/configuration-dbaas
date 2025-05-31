@@ -42,6 +42,12 @@ spec:
                 parameters:
                   type: object
                   properties:
+                    provider:
+                      type: string
+                      enum:
+                        - aws
+                        - azure
+                        - gcp
                     region:
                       type: string
                       description: Region is the region you'd like your resource to be created in.

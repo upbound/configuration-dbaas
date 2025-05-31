@@ -1,0 +1,26 @@
+apiVersion: meta.dev.upbound.io/v1alpha1
+kind: Project
+metadata:
+  name: configuration-dbaas
+spec:
+  dependsOn:
+  - configuration: xpkg.upbound.io/upbound/configuration-aws-database
+    version: v0.16.0
+  - configuration: xpkg.upbound.io/upbound/configuration-azure-database
+    version: v0.17.0
+  #- configuration: xpkg.upbound.io/upbound/configuration-gcp-database
+  #  version: v0.9.0
+  - function: xpkg.upbound.io/crossplane-contrib/function-auto-ready
+    version: '>=v0.0.0'
+  description: |
+    The configuration-dbaas configuration provides an example abstraction to
+    provision multi-cloud database instances.
+  license: Apache-2.0
+  maintainer: Upbound <support@upbound.io>
+  readme: |
+    The configuration-dbaas bundles a single API that allows unified
+    multi-cloud provisioning of fully managed database instances. Save time
+    and improve reliability by deploying the most popular database services
+    using the same consistent Claim spec.
+  repository: xpkg.upbound.io/upbound/configuration-dbaas
+  source: github.com/upbound/configuration-dbaas

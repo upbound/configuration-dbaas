@@ -1,13 +1,10 @@
 apiVersion: dbaas.upbound.io/v1alpha1
-kind: SQLInstance
+kind: XSQLInstance
 metadata:
   name: configuration-dbaas-gcp-mysql
-  namespace: default
 spec:
-  compositionSelector:
-    matchLabels:
-      provider: gcp
   parameters:
+    provider: gcp
     region: us-west2
     engine: mysql
     engineVersion: "8_0"
