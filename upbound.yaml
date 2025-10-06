@@ -4,13 +4,21 @@ metadata:
   name: configuration-dbaas
 spec:
   dependsOn:
-  - configuration: xpkg.upbound.io/upbound/configuration-aws-database
+  - apiVersion: pkg.crossplane.io/v1
+    kind: Configuration
+    package: xpkg.upbound.io/upbound/configuration-aws-database
     version: v0.16.0
-  - configuration: xpkg.upbound.io/upbound/configuration-azure-database
-    version: v0.17.0
-  #- configuration: xpkg.upbound.io/upbound/configuration-gcp-database
-  #  version: v0.9.0
-  - function: xpkg.upbound.io/crossplane-contrib/function-auto-ready
+  - apiVersion: pkg.crossplane.io/v1
+    kind: Configuration
+    package: xpkg.upbound.io/upbound/configuration-azure-database
+    version: v0.18.0
+  - apiVersion: pkg.crossplane.io/v1
+    kind: Configuration
+    package: xpkg.upbound.io/upbound/configuration-gcp-database
+    version: v0.11.0
+  - apiVersion: pkg.crossplane.io/v1
+    kind: Function
+    package: xpkg.upbound.io/crossplane-contrib/function-auto-ready
     version: '>=v0.0.0'
   description: |
     The configuration-dbaas configuration provides an example abstraction to

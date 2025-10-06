@@ -2,6 +2,7 @@ import models.k8s.apimachinery.pkg.apis.meta.v1 as metav1
 import models.io.upbound.dbaas.v1alpha1 as dbaasv1alpha1
 import models.io.upbound.platform.aws.v1alpha1 as platformawsv1alpha1
 import models.io.upbound.platform.azure.v1alpha1 as platformazurev1alpha1
+import models.io.upbound.platform.gcp.v1alpha1 as platformgcpv1alpha1
 import base64
 
 oxr = dbaasv1alpha1.XSQLInstance{**option("params").oxr}
@@ -94,6 +95,35 @@ elif oxr.spec.parameters.provider == "azure":
                         ]
                         deletionPolicy = oxr.spec.parameters.deletionPolicy
                         generalSubnetRange = "10.0.1.0/24"
+                        id = oxr.metadata.name
+                        providerConfigName = oxr.spec.parameters.providerConfigName
+                        region = oxr.spec.parameters.region
+                    }
+                }
+            }
+    ]
+
+elif oxr.spec.parameters.provider == "gcp":
+
+    # we want to forward all parameters except for "provider"
+    _instanceParameters = {k: v for k, v in oxr.spec.parameters if k != "provider"} | {
+        networkRef.id = oxr.metadata.name
+    }
+
+    _items += [
+            platformgcpv1alpha1.XSQLInstance{
+                metadata = _metadata("sqlinstance")
+                spec = {
+                    parameters = {
+                        **_instanceParameters
+                    }
+                }
+            }
+            platformgcpv1alpha1.XNetwork{
+                metadata = _metadata("network")
+                spec = {
+                    parameters = {
+                        deletionPolicy = oxr.spec.parameters.deletionPolicy
                         id = oxr.metadata.name
                         providerConfigName = oxr.spec.parameters.providerConfigName
                         region = oxr.spec.parameters.region

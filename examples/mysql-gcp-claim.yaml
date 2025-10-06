@@ -15,6 +15,7 @@ spec:
       key: password
   writeConnectionSecretToRef:
     name: configuration-dbaas-gcp-mysql
+    namespace: default
 ---
 apiVersion: v1
 data:

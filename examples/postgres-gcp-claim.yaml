@@ -16,6 +16,7 @@ spec:
       key: password
   writeConnectionSecretToRef:
     name: configuration-dbaas-gcp-postgresql
+    namespace: default
 ---
 apiVersion: v1
 data:
