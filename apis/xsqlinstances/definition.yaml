@@ -13,8 +13,10 @@ spec:
   connectionSecretKeys:
     - username
     - password
-    - port
     - host
+    - port  # Azure
+    - endpoint  # AWS
+    - serverCACertificateCert  # GCP
   versions:
     - name: v1alpha1
       served: true

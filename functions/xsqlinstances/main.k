@@ -177,13 +177,26 @@ elif oxr.spec.parameters.provider == "gcp":
     ]
 
 
+# Propagate connection details from provider-specific XSQLInstance
 _items += [
         {
             apiVersion: "meta.krm.kcl.dev/v1alpha1"
             kind: "CompositeConnectionDetails"
-            data: {
-                "host" = base64.encode(_ocds["sqlinstance"]?.Resource?.status?.atProvider?.host)
-            }
+            if "sqlinstance" in _ocds:
+                data: {
+                    # Common connection details available from all providers
+                    username = _ocds["sqlinstance"].ConnectionDetails.username if "username" in _ocds["sqlinstance"].ConnectionDetails else None
+                    password = _ocds["sqlinstance"].ConnectionDetails.password if "password" in _ocds["sqlinstance"].ConnectionDetails else None
+                    host = _ocds["sqlinstance"].ConnectionDetails.host if "host" in _ocds["sqlinstance"].ConnectionDetails else None
+                    # AWS-specific: endpoint
+                    **({endpoint = _ocds["sqlinstance"].ConnectionDetails.endpoint} if "endpoint" in _ocds["sqlinstance"].ConnectionDetails else {})
+                    # Azure-specific: port
+                    **({port = _ocds["sqlinstance"].ConnectionDetails.port} if "port" in _ocds["sqlinstance"].ConnectionDetails else {})
+                    # GCP-specific: serverCACertificateCert
+                    **({serverCACertificateCert = _ocds["sqlinstance"].ConnectionDetails.serverCACertificateCert} if "serverCACertificateCert" in _ocds["sqlinstance"].ConnectionDetails else {})
+                }
+            else:
+                data: {}
         }
 ]
 items = _items

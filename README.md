@@ -38,11 +38,19 @@ In this specific configuration, the Database API contains:
 
 ## Testing
 
-The configuration can be tested using:
+The configuration includes comprehensive testing coverage:
 
-- `up composition render --xrd=apis/definition.yaml apis/xsqlinstances/composition.yaml examples/postgres-aws-claim.yaml` to render the composition
-- `up test run tests/*` to run composition tests
-- `up test run tests/* --e2e` to run end-to-end tests
+**Composition Tests:**
+- `up test run tests/test-*` - Fast validation of all 3 providers
+
+**E2E Tests (full support matrix):**
+- `up test run tests/e2etest-* --e2e` - Deploys real databases:
+  - AWS: PostgreSQL 16.3, MariaDB 10.11
+  - Azure: PostgreSQL 16, MySQL 8.0.21
+  - GCP: PostgreSQL 15, MySQL 8_0
+
+**Rendering:**
+- `up composition render --xrd=apis/xsqlinstances/definition.yaml apis/xsqlinstances/composition.yaml examples/postgres-aws.yaml`
 
 ## Deployment
 
