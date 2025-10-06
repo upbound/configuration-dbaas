@@ -55,6 +55,29 @@ _items = [
                             region = "us-west-2"
                             deletionPolicy = "Delete"
                             providerConfigName = "default"
+                            vpcCidrBlock = "192.168.0.0/16"
+                            subnets = [
+                                {
+                                    availabilityZone = "us-west-2a"
+                                    type = "public"
+                                    cidrBlock = "192.168.0.0/18"
+                                }
+                                {
+                                    availabilityZone = "us-west-2b"
+                                    type = "public"
+                                    cidrBlock = "192.168.64.0/18"
+                                }
+                                {
+                                    availabilityZone = "us-west-2a"
+                                    type = "private"
+                                    cidrBlock = "192.168.128.0/18"
+                                }
+                                {
+                                    availabilityZone = "us-west-2b"
+                                    type = "private"
+                                    cidrBlock = "192.168.192.0/18"
+                                }
+                            ]
                         }
                     }
                 }

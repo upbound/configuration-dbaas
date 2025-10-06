@@ -2,6 +2,26 @@
 
 This repository contains an Upbound project, tailored for users establishing their initial control plane with [Upbound](https://cloud.upbound.io). This configuration deploys fully managed database instances across AWS, Azure, and GCP.
 
+## Supported Database Engines
+
+| Provider | PostgreSQL | MySQL | MariaDB |
+|----------|------------|-------|---------|
+| **AWS**  | ✅         | ❌    | ✅      |
+| **Azure**| ✅         | ✅    | ❌      |
+| **GCP**  | ✅         | ✅    | ❌      |
+
+**Note:** This configuration currently supports a subset of available database engines. The engine availability is determined by the underlying provider-specific configurations.
+
+## Supported AWS Regions
+
+The following AWS regions are supported with proper availability zone mapping:
+- `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`
+- `eu-west-1`, `eu-west-2`, `eu-central-1`
+- `ap-southeast-1`, `ap-southeast-2`, `ap-northeast-1`
+- `ca-central-1`
+
+Other AWS regions will default to `us-west-2` availability zones. For additional regions, please update the region-to-AZ mapping in `functions/xsqlinstances/main.k`.
+
 ## Overview
 
 The core components of a custom API in [Upbound Project](https://docs.upbound.io/learn/control-plane-project/) include:

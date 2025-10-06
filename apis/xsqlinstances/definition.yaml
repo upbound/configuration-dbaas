@@ -63,7 +63,11 @@ spec:
                       type: string
                       default: default
                     engine:
-                      description: Database engine
+                      description: |
+                        Database engine. Note: Engine support varies by provider:
+                        - AWS: postgres, mariadb
+                        - Azure: postgres, mysql
+                        - GCP: postgres, mysql
                       type: string
                       enum:
                         - mariadb
