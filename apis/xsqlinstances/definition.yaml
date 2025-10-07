@@ -13,8 +13,10 @@ spec:
   connectionSecretKeys:
     - username
     - password
-    - port
     - host
+    - port  # Azure
+    - endpoint  # AWS
+    - serverCACertificateCert  # GCP
   versions:
     - name: v1alpha1
       served: true
@@ -42,6 +44,12 @@ spec:
                 parameters:
                   type: object
                   properties:
+                    provider:
+                      type: string
+                      enum:
+                        - aws
+                        - azure
+                        - gcp
                     region:
                       type: string
                       description: Region is the region you'd like your resource to be created in.
@@ -57,7 +65,11 @@ spec:
                       type: string
                       default: default
                     engine:
-                      description: Database engine
+                      description: |
+                        Database engine. Note: Engine support varies by provider:
+                        - AWS: postgres, mariadb
+                        - Azure: postgres, mysql
+                        - GCP: postgres, mysql
                       type: string
                       enum:
                         - mariadb

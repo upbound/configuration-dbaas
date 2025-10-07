@@ -1,29 +1,27 @@
 apiVersion: dbaas.upbound.io/v1alpha1
-kind: SQLInstance
+kind: XSQLInstance
 metadata:
-  name: configuration-dbaas-azure-mariadb
-  namespace: default
+  name: configuration-dbaas-azure-mysql
 spec:
-  compositionSelector:
-    matchLabels:
-      provider: azure
   parameters:
-    region: westus
-    engine: mariadb
+    provider: azure
+    region: westus2
+    engine: mysql
     engineVersion: "10.3"
-    storageGB: 5
+    storageGB: 32
     passwordSecretRef:
       namespace: default
-      name: mariadbsecretazure
+      name: mysqlsecretazure
       key: password
   writeConnectionSecretToRef:
-    name: configuration-dbaas-azure-mariadb
+    name: configuration-dbaas-azure-mysql
+    namespace: default
 ---
 apiVersion: v1
 data:
   password: dXBiMHVuZHIwY2s1ITMxMzM3
 kind: Secret
 metadata:
-  name: mariadbsecretazure
+  name: mysqlsecretazure
   namespace: default
 type: Opaque

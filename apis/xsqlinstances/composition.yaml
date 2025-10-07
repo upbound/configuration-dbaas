@@ -1,0 +1,17 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xsqlinstances.dbaas.upbound.io
+spec:
+  compositeTypeRef:
+    apiVersion: dbaas.upbound.io/v1alpha1
+    kind: XSQLInstance
+  writeConnectionSecretsToNamespace: crossplane-system
+  mode: Pipeline
+  pipeline:
+  - functionRef:
+      name: upbound-configuration-dbaasxsqlinstances
+    step: xsqlinstances
+  - functionRef:
+      name: crossplane-contrib-function-auto-ready
+    step: crossplane-contrib-function-auto-ready
