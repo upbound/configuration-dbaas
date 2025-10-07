@@ -103,7 +103,7 @@ elif oxr.spec.parameters.provider == "azure":
     if oxr.spec.parameters.engine == "mysql":
         _subnetServiceType = "mysql"
     elif oxr.spec.parameters.engine == "postgres":
-        _subnetServiceType = "postgresql"
+        _subnetServiceType = "postgres"
     else:
         assert False, "Unsupported engine: {}".format(oxr.spec.parameters.engine)
 

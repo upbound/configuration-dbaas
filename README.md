@@ -45,9 +45,9 @@ The configuration includes comprehensive testing coverage:
 
 **E2E Tests (full support matrix):**
 - `up test run tests/e2etest-* --e2e` - Deploys real databases:
-  - AWS: PostgreSQL 16.3, MariaDB 10.11
-  - Azure: PostgreSQL 16, MySQL 8.0.21
-  - GCP: PostgreSQL 15, MySQL 8_0
+  - AWS: PostgreSQL 16.3, MariaDB 10.11 (us-west-2)
+  - Azure: PostgreSQL 16, MySQL 8.0.21 (westeurope)
+  - GCP: PostgreSQL 15, MySQL 8_0 (us-west2)
 
 **Rendering:**
 - `up composition render --xrd=apis/xsqlinstances/definition.yaml apis/xsqlinstances/composition.yaml examples/postgres-aws.yaml`
