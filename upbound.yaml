@@ -11,15 +11,15 @@ spec:
   - apiVersion: pkg.crossplane.io/v1
     kind: Configuration
     package: xpkg.upbound.io/upbound/configuration-aws-database
-    version: v0.16.0
+    version: v0.16.2
   - apiVersion: pkg.crossplane.io/v1
     kind: Configuration
     package: xpkg.upbound.io/upbound/configuration-azure-database
-    version: v0.18.0
+    version: v0.18.1
   - apiVersion: pkg.crossplane.io/v1
     kind: Configuration
     package: xpkg.upbound.io/upbound/configuration-gcp-database
-    version: v0.11.0
+    version: v0.11.1
   - apiVersion: pkg.crossplane.io/v1
     kind: Function
     package: xpkg.upbound.io/crossplane-contrib/function-auto-ready
