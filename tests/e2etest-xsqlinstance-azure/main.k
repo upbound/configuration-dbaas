@@ -28,6 +28,7 @@ _mysql_secret = k8sv1.Secret{
 _postgres_xr = dbaasv1alpha1.XSQLInstance{
     metadata = {
         name = "e2e-postgres-azure"
+        annotations = {"uptest.upbound.io/timeout" = "5400"}
     }
     spec = {
         parameters = {
@@ -54,6 +55,7 @@ _postgres_xr = dbaasv1alpha1.XSQLInstance{
 _mysql_xr = dbaasv1alpha1.XSQLInstance{
     metadata = {
         name = "e2e-mysql-azure"
+        annotations = {"uptest.upbound.io/timeout" = "5400"}
     }
     spec = {
         parameters = {
