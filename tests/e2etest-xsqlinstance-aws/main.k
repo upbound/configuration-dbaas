@@ -28,6 +28,7 @@ _mariadb_secret = k8sv1.Secret{
 _postgres_xr = dbaasv1alpha1.XSQLInstance{
     metadata = {
         name = "e2e-postgres-aws"
+        annotations = {"uptest.upbound.io/timeout" = "5400"}
     }
     spec = {
         parameters = {
@@ -54,6 +55,7 @@ _postgres_xr = dbaasv1alpha1.XSQLInstance{
 _mariadb_xr = dbaasv1alpha1.XSQLInstance{
     metadata = {
         name = "e2e-mariadb-aws"
+        annotations = {"uptest.upbound.io/timeout" = "5400"}
     }
     spec = {
         parameters = {
