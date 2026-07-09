@@ -30,6 +30,8 @@ jobs:
         if: env.UP_API_TOKEN != '' && env.UP_ORG != ''
         uses: upbound/action-up@53fe6395637d884c80d2bbc8c2d75d0ece776ced # v1
         with:
+          # Pinned to isolate the e2e assert-timeout regression in up v0.50.0.
+          version: v0.49.1
           api-token: ${{ env.UP_API_TOKEN }}
           organization: ${{ env.UP_ORG }}
 
